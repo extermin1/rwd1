@@ -1,40 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Document</title>
-    <link rel="stylesheet" href="./style.css">
+    <meta name="viewprot" content="width=device-width" >
+    <title>qwqw</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body,h1,h2,h3,ul{margin: 0; padding: 0; }
+        li { list-style: none;}
+        a { text-decoration: none;}
+        address { font-style: normal;}
+        .hidden { overflow: hidden; width: 1px; height: 1px; margin: -1px; position: absolute; clip-path: polygon(0 0, 0 0, 0 0);}
+
+        /*header*/
+        #header{height: 100px;
+            display: flex;
+            justify-content: center; 
+            border-bottom: 1px solid #8e8e8e;
+            background: #ffff00; 
+            align-items: center;}
+        #header h1{position: absolute; top: 15px;left: 100px;}
+        #header h1 a{font-size: 20px;}
+        /*members*/
+        #member {position: absolute; top: 40px; right: 100px;}
+        #member ul {display: flex;}
+        #member ul li { margin-left: 20px;}
+        #member ul li a {font-weight: bold;}
+        /*gnb view Gnb*/
+        .viewGnb{
+            display: none;
+            position: absolute; top: 25px; left: 50px; 
+            width: 50px;height: 50px;
+            border: #000 1px solid;
+            text-indent: -100%; overflow: hidden;
+
+        }
+        .viewGnb::before{content:""; position: absolute; top: 15px; left: 10px; width: 30px; border-bottom: 2px solid #000;}
+        .viewGnb::after{content: ""; position: absolute; top: 30px; left: 10px; width: 30px; border-bottom: 2px solid #000;}
+        .viewGnb:hover::before {transform: translateY(7.5px) rotate(45deg); transition: 0.5s;}
+        .viewGnb:hover::after {transform: translateY(-7.5px) rotate(-45deg); transition: 0.5s;}
+        
+        /*gnb*/
+        #gnb{}
+        #gnb ul{display: flex;}
+        #gnb ul li {margin: 0 20px;}
+        #gnb ul li a {font-size: 18px;}
+        /*main*/
+        main { width: 1200px; margin: 50px auto;
+            display: flex;}
+        section{
+            height: 400px;  width: 100%;
+            border: 1px solid #000;
+            background: #ff00ff;}
+        section:not(:last-child) {margin-right: 1%;}
+
+        footer{padding: 50px 0; background: #801818; color: #fff; text-align: center;}
+        @media screen and (max-width:1200px) {
+            main{ width: 100%;}
+        }
+
+
+
+
+
+
+        @media screen and (max-width:1000px) {
+            #header h1{left: 50%; transform: translateX(-50%); }/*중앙배치*/
+            #member{right: 20px;}
+            .viewGnb{display: block;}
+
+            #gnb {position: fixed; top: 0;left: -200px; width: 200px; height: 100vh; background: #000; transition: 1s;}
+            #gnb ul {flex-direction: column; margin-top: 50px;/*flex-direction: column*/}
+            #gnb ul li{ text-align: center; line-height: 100px;}
+            #gnb ul li a{color: #fff;}
+
+            main{flex-flow: wrap;}
+            section{width: 49.5%;}
+            section:not(:last-child) {margin-right: 0;}
+            section:nth-child(odd) {margin-right: 1%;}
+            section:nth-child(1),section:nth-child(2) {margin-bottom: 10px;}
+        }
+        /*@media screen and (max-width:600px){
+            section {width: 100%; margin: 0;}
+            section:nth-child(odd){margin: 0;}
+            section:nth-child(1),section:nth-child(2) {margin-bottom: 0;}
+            .viewGnb:active + #gnb {left: 0;}
+        }*/
+    </style>
 </head>
 <body>
     <header id="header">
-        <h1 id="logo"><a href="#">로고</a></h1>
-        <nav id="nav">
-            <ul id="nav_ul">
-                <li><a href="#">메뉴1</a></li>
-                <li><a href="#">메뉴2</a></li>
-                <li><a href="#">메뉴3</a></li>
-                <li><a href="#">메뉴4</a></li>
+        <h1><a href="#">로고</a></h1>
+        <nav id="member">
+            <h2 class="hidden">멤버쉽관련</h2>
+            <ul>
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">회원가입</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="viewGnb"><span class="hidden">apsbqghrl</span></a>
+        <nav id="gnb">
+            <h2 class="hidden">주요메뉴</h2>
+            <ul>
+                <li><a href="#">리스트1</a></li>
+                <li><a href="#">리스트2</a></li>
+                <li><a href="#">리스트3</a></li>
+                <li><a href="#">리스트4</a></li>
             </ul>
         </nav>
     </header>
-
-
-
-    <main id="main_contain">
-        <section class="section">
-            <h2>1</h2>
-        </section>
-        <section class="section">
-            <h2>2</h2>
-        </section>
-        <section class="section">
-            <h2>3</h2>
-        </section>
+    <main id="content">
+        <section><h2>컨텐츠1</h2></section>
+        <section><h2>컨텐츠2</h2></section>
+        <section><h2>컨텐츠3</h2></section>
+        <section><h2>컨텐츠4</h2></section>
     </main>
+    <footer>
+        <address>푸터</address>
+    </footer>
+    <script>
+        const gnbBtn = document.querySelector('.viewGnb');
+        const gnb = document.getElementById("gnb")
+        console.log(gnbBtn,gnb);
+        gnbBtn.addEventListener("click", ()=> {
+        gnb.style.left = "0px";
+      })
+      gnb.addEventListener('mouseleave', ()=>{
+        gnb.style.left = "-200px";
+      })
 
-
-    
-    <footer id="footer">footer</footer>
+    </script>
 </body>
 </html>
